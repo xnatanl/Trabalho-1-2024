@@ -94,46 +94,6 @@ programa
 		}		
 	}	
 
-	funcao casa2()
-	{
-		//deve avançar o jogador para a casa 5.
-	}
-
-	funcao casa3()
-	{
-		//deve jogar um dado adicional de 3 lados.
-	}
-
-	funcao casa7()
-	{
-		//deve impedir que o jogador jogue o dado por 1 rodada.
-	}
-
-	funcao casa10()
-	{
-		//deve trocar as casa em que os jogadores estão.
-	}
-
-	funcao casa12()
-	{
-		//deve retroceder 1 casa
-	}
-
-	funcao casa15()
-	{
-		//deve cantar um trecho de uma música (na vida real) ou voltar 2 casas
-	}
-
-	funcao casa19()
-	{
-		//deve voltar para a casa 1
-	}
-
-	funcao casa20()
-	{
-		//recebe a mensagem de vencedor da partida
-	}
-
 	funcao jogo(cadeia &menuOpt, inteiro &keepPlaying, cadeia &player1, cadeia &player2, inteiro &casaPlayer1, inteiro &casaPlayer2, inteiro &placarPlayer1, inteiro &placarPlayer2)
 	{
 		enquanto(casaPlayer1 < 20 ou casaPlayer2 < 20)
@@ -142,42 +102,42 @@ programa
 			
 			se(casaPlayer1 == 2 e casaPlayer2 < 20)
 			{
-				
+				//deve avançar o jogador para a casa 5.
 			}
 			
 			se(casaPlayer1 == 3 e casaPlayer2 < 20)
 			{
-				
+				//deve jogar um dado adicional de 3 lados.
 			}
 			
 			se(casaPlayer1 == 7 e casaPlayer2 < 20)
 			{
-				
+				//deve impedir que o jogador jogue o dado por 1 rodada.
 			}
 			
 			se(casaPlayer1 == 10 e casaPlayer2 < 20)
 			{
-				
+				//deve trocar as casa em que os jogadores estão.
 			}	
 
 			se(casaPlayer1 == 12 e casaPlayer2 < 20)
 			{
-				
+				//deve retroceder 1 casa
 			}			
 
 			se(casaPlayer1 == 15 e casaPlayer2 < 20)
 			{
-				
+				//deve cantar um trecho de uma música (na vida real) ou voltar 2 casas
 			}			
 
 			se(casaPlayer1 == 19 e casaPlayer2 < 20)
 			{
-				
+				//deve voltar para a casa 1
 			}
 
 			se(casaPlayer1 == 20 e casaPlayer2 < 20)
 			{
-				
+				//recebe a mensagem de vencedor da partida
 			}		
 
 //-----PLAYER2-----------------------------------------------------------------------------------------------------------------------------------------------------/
@@ -220,8 +180,7 @@ programa
 			se(casaPlayer2 == 20 e casaPlayer1 < 20)
 			{
 				
-			}					
-													
+			}															
 		}
 	}
 
