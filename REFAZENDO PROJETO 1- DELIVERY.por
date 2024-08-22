@@ -1,7 +1,98 @@
 programa
 {
 	
-	inclua biblioteca Util --> u
+	inclua biblioteca Util --> u	
+
+	funcao VerificarPlacar(cadeia &player1, cadeia &player2, inteiro &casaPlayer1, inteiro &casaPlayer2, inteiro &placarPlayer1, inteiro &placarPlayer2)
+	{
+		escreva("PLACAR\n")
+		escreva(player1, " NA CASA ", casaPlayer1,"\n")
+		escreva(player2, " NA CASA ", casaPlayer2,"\n")
+		escreva("\nRODADAS VENCIDAS\n")
+		escreva(placarPlayer1, " - ", player1, " - ", player2, " - ", placarPlayer2, "\n\n")
+	}		
+
+	funcao fecharJogo(inteiro &keepPlaying)
+	{
+		keepPlaying = 0
+	}
+	
+	funcao escolherPersonagem(cadeia &player1, cadeia &player2)
+	{
+		cadeia inputPlayer1 = "1", inputPlayer2 = "1"
+		inteiro sorteioDado1 = 0, sorteioDado2 = 0, loopPersonagem = 1
+
+		enquanto(loopPersonagem == 1)
+		{	
+			limpa()
+			escreva("\n-SESSAO PARA ESCOLHA DE PERSONAGENS E QUEM JOGARA PRIMEIRO-\n")
+			escreva("\nQUEM JOGAR O MAIOR DADO DEVE\n-ESCOLHER O PERSONAGEM COM QUEM DESEJA JOGAR\n-SAIR JOGANDO\n")	
+			escreva("\n-COMANDOS-\n2- PLACAR\n3- FECHAR JOGO\nOUTRA TECLA- JOGAR\n")		
+			escreva("\nSORTEIEM OS DADOS\n")
+			
+			escreva("JOGADOR 1\n")
+			leia(inputPlayer1)
+			sorteioDado1 = u.sorteia(1, 6)
+
+			escreva("JOGADOR 2\n")
+			leia(inputPlayer2)
+			sorteioDado2 = u.sorteia(1, 6)
+	
+			enquanto(sorteioDado1 == sorteioDado2)
+			{
+				sorteioDado1 = u.sorteia(1, 6)
+				sorteioDado2 = u.sorteia(1, 6) 
+			}
+	
+			se(sorteioDado1 > sorteioDado2)
+			{
+				limpa()
+				escreva("JOGADOR 1 TIROU O MAIOR DADO, ESCOLHA SEU PERSONAGEM\n")
+				escreva("0- iFood\n")
+				escreva("1- UberEats\n")	
+				leia(inputPlayer1)
+	
+				se(inputPlayer1 == "0")
+				{
+					player1 = "iFood"
+					player2 = "UberEats"
+				}
+	
+				se(inputPlayer1 == "1")
+				{
+					player1 = "UberEats"
+					player2 = "iFood"
+				}
+				
+				escreva(player1, " VOCE JOGA PRIMEIRO\n")
+				loopPersonagem = 0		
+			}
+	
+			se(sorteioDado2 > sorteioDado1)
+			{
+				limpa()
+				escreva("JOGADOR 2 TIROU O MAIOR DADO, ESCOLHA SEU PERSONAGEM\n")
+				escreva("0- iFood\n")
+				escreva("1- UberEats\n")	
+				leia(inputPlayer2)
+	
+				se(inputPlayer2 == "0")
+				{
+					player2 = "iFood"
+					player1 = "UberEats"
+				}
+	
+				se(inputPlayer2 == "1")
+				{
+					player2 = "UberEats"
+					player1 = "iFood"
+				}
+	
+				escreva(player2, " VOCE JOGA PRIMEIRO\n")	
+				loopPersonagem = 0									
+			}
+		}		
+	}	
 
 	funcao casa2()
 	{
@@ -42,104 +133,96 @@ programa
 	{
 		//recebe a mensagem de vencedor da partida
 	}
-	
-	funcao escolherPersonagem()
-	{
-		cadeia inputPlayer1 = "1", inputPlayer2 = "1", player1 = "0", player2 = "0"
-		inteiro sorteioDado1 = 0, sorteioDado2 = 0, LoopInicial = 1
 
-		enquanto(LoopInicial == 1)
-		{	
-			escreva("SESSAO PARA ESCOLHA DE PERSONAGENS E QUEM JOGARA PRIMEIRO\n")
-			escreva("QUEM JOGAR O MAIOR DADO DEVE\n-ESCOLHER O PERSONAGEM COM QUEM DESEJA JOGAR\n-SAIR JOGANDO\n")			
-			escreva("\nSORTEIEM OS DADOS\n")
+	funcao jogo(cadeia &menuOpt, inteiro &keepPlaying, cadeia &player1, cadeia &player2, inteiro &casaPlayer1, inteiro &casaPlayer2, inteiro &placarPlayer1, inteiro &placarPlayer2)
+	{
+		enquanto(casaPlayer1 < 20 ou casaPlayer2 < 20)
+		{
+			escolherPersonagem(player1, player2)
 			
-			escreva("JOGADOR 1\n")
-			leia(inputPlayer1)
-			sorteioDado1 = u.sorteia(1, 6)
-
-			escreva("JOGADOR 2\n")
-			leia(inputPlayer2)
-			sorteioDado2 = u.sorteia(1, 6)
-	
-			enquanto(sorteioDado1 == sorteioDado2)
+			se(casaPlayer1 == 2 e casaPlayer2 < 20)
 			{
-				sorteioDado1 = u.sorteia(1, 6)
-				sorteioDado2 = u.sorteia(1, 6) 
-			}
-	
-			se(sorteioDado1 > sorteioDado2)
-			{
-				escreva("JOGADOR 1 TIROU O MAIOR DADO, ESCOLHA SEU PERSONAGEM\n")
-				escreva("1- iFood\n")
-				escreva("2- UberEats\n")	
-				leia(inputPlayer1)
-	
-				se(inputPlayer1 == "1")
-				{
-					player1 = "iFood"
-				}
-	
-				se(inputPlayer1 == "2")
-				{
-					player1 = "UberEats"
-				}
 				
-				escreva(player1, "VOCE JOGA PRIMEIRO\n")	
 			}
-	
-			se(sorteioDado2 > sorteioDado1)
+			
+			se(casaPlayer1 == 3 e casaPlayer2 < 20)
 			{
-				escreva("JOGADOR 2 TIROU O MAIOR DADO, ESCOLHA SEU PERSONAGEM\n")
-				escreva("1- iFood\n")
-				escreva("2- UberEats\n")	
-				leia(inputPlayer2)
-	
-				se(inputPlayer2 == "1")
-				{
-					player2 = "iFood"
-				}
-	
-				se(inputPlayer2 == "2")
-				{
-					player2 = "UberEats"
-				}
-	
-				escreva(player2, "VOCE JOGA PRIMEIRO\n")										
+				
 			}
-		}		
-	}
+			
+			se(casaPlayer1 == 7 e casaPlayer2 < 20)
+			{
+				
+			}
+			
+			se(casaPlayer1 == 10 e casaPlayer2 < 20)
+			{
+				
+			}	
 
-	funcao VerificarPlacar(cadeia player1, cadeia player2, inteiro casaPlayer1, inteiro casaPlayer2, inteiro placarPlayer1, inteiro placarPlayer2)
-	{
-		escreva("\nPLACARES\n")
-		escreva(player1, "NA CASA ", casaPlayer1,"\n")
-		escreva(player2, "NA CASA ", casaPlayer2,"\n")
-		escreva("\nRODADAS VENCIDAS\n")
-		escreva(placarPlayer1, " - ", player1, " - ", player2, " - ", placarPlayer2, "\n")
-	}
+			se(casaPlayer1 == 12 e casaPlayer2 < 20)
+			{
+				
+			}			
 
-	funcao fecharJogo(inteiro &keepPlaying)
-	{
-		keepPlaying = 0
-	}
+			se(casaPlayer1 == 15 e casaPlayer2 < 20)
+			{
+				
+			}			
 
-	funcao jogo(cadeia &menuOpt, inteiro keepPlaying, cadeia player1, cadeia player2, inteiro casaPlayer1, inteiro casaPlayer2, inteiro placarPlayer1, inteiro placarPlayer2)
-	{
-		se(menuOpt == "1")
-		{
-		escolherPersonagem()
+			se(casaPlayer1 == 19 e casaPlayer2 < 20)
+			{
+				
+			}
+
+			se(casaPlayer1 == 20 e casaPlayer2 < 20)
+			{
+				
+			}		
+
+//-----PLAYER2-----------------------------------------------------------------------------------------------------------------------------------------------------/
+			
+			se(casaPlayer2 == 2 e casaPlayer1 < 20)
+			{
+				
+			}
+			
+			se(casaPlayer2 == 3 e casaPlayer1 < 20)
+			{
+				
+			}
+			
+			se(casaPlayer2 == 7 e casaPlayer1 < 20)
+			{
+				
+			}
+			
+			se(casaPlayer2 == 10 e casaPlayer1 < 20)
+			{
+				
+			}	
+
+			se(casaPlayer2 == 12 e casaPlayer1 < 20)
+			{
+				
+			}			
+
+			se(casaPlayer2 == 15 e casaPlayer1 < 20)
+			{
+				
+			}			
+
+			se(casaPlayer2 == 19 e casaPlayer1 < 20)
+			{
+				
+			}
+
+			se(casaPlayer2 == 20 e casaPlayer1 < 20)
+			{
+				
+			}					
+													
 		}
-		
-		se(menuOpt == "2")
-		{
-			VerificarPlacar(player1, player2, casaPlayer1, casaPlayer2, placarPlayer1, placarPlayer2)
-		}
-		
-		se(menuOpt == "3")
-		{
-			fecharJogo(keepPlaying)	
-		}				
 	}
 
 	funcao inicio()
@@ -162,18 +245,23 @@ programa
 	
 			se(menuOpt == "2")
 			{
-				VerificarPlacar(player1, player2, casaPlayer1, casaPlayer2, placarPlayer1, placarPlayer2)	
+				limpa()				
+				VerificarPlacar(player1, player2, casaPlayer1, casaPlayer2, placarPlayer1, placarPlayer2)
+				u.aguarde(4000)
 			}
 	
 			se(menuOpt == "3")
 			{
 				fecharJogo(keepPlaying)	
-			}	
+			}
+
+			se(menuOpt != "1" e menuOpt != "2" e menuOpt != "3")
+			{
+				limpa()
+			}
 		}		
 	}
 }
-
-
 /* $$$ Portugol Studio $$$ 
  * 
  * Esta seção do arquivo guarda informações do Portugol Studio.
