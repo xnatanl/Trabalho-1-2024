@@ -3,17 +3,60 @@ programa
 	
 	inclua biblioteca Util --> u
 
+	funcao casa2()
+	{
+		//deve avançar o jogador para a casa 5.
+	}
+
+	funcao casa3()
+	{
+		//deve jogar um dado adicional de 3 lados.
+	}
+
+	funcao casa7()
+	{
+		//deve impedir que o jogador jogue o dado por 1 rodada.
+	}
+
+	funcao casa10()
+	{
+		//deve trocar as casa em que os jogadores estão.
+	}
+
+	funcao casa12()
+	{
+		//deve retroceder 1 casa
+	}
+
+	funcao casa15()
+	{
+		//deve cantar um trecho de uma música (na vida real) ou voltar 2 casas
+	}
+
+	funcao casa19()
+	{
+		//deve voltar para a casa 1
+	}
+
+	funcao casa20()
+	{
+		//recebe a mensagem de vencedor da partida
+	}
+	
+
+
+
 	funcao escolherPersonagem()
 	{
-		cadeia inputPlayer1, inputPlayer2, player1, player2
-		inteiro sorteioDado1, sorteioDado2, LoopInicial = 1
+		cadeia inputPlayer1 = "1", inputPlayer2 = "1", player1 = "0", player2 = "0"
+		inteiro sorteioDado1 = 0, sorteioDado2 = 0, LoopInicial = 1
 
 		enquanto(LoopInicial == 1)
-		{		
+		{	
 			escreva("SESSAO PARA ESCOLHA DE PERSONAGENS E QUEM JOGARA PRIMEIRO\n")
-			escreva("QUEM JOGAR O MAIOR DADO DEVE\n-ESCOLHER O PERSONAGEM COM QUEM DESEJA JOGAR\n-SAIR JOGANDO\n")	
-			escreva("SORTEIEM OS DADOS\n")
-
+			escreva("QUEM JOGAR O MAIOR DADO DEVE\n-ESCOLHER O PERSONAGEM COM QUEM DESEJA JOGAR\n-SAIR JOGANDO\n")			
+			escreva("\nSORTEIEM OS DADOS\n")
+			
 			escreva("JOGADOR 1\n")
 			leia(inputPlayer1)
 			sorteioDado1 = u.sorteia(1, 6)
@@ -22,9 +65,10 @@ programa
 			leia(inputPlayer2)
 			sorteioDado2 = u.sorteia(1, 6)
 	
-			se(sorteioDado1 == sorteioDado2)
+			enquanto(sorteioDado1 == sorteioDado2)
 			{
-				escreva("DADOS IGUAIS, SORTEIEM OS DADOS NOVAMENTE\n")
+				sorteioDado1 = u.sorteia(1, 6)
+				sorteioDado2 = u.sorteia(1, 6) 
 			}
 	
 			se(sorteioDado1 > sorteioDado2)
@@ -45,7 +89,6 @@ programa
 				}
 				
 				escreva(player1, "VOCE JOGA PRIMEIRO\n")	
-				jogo()			
 			}
 	
 			se(sorteioDado2 > sorteioDado1)
@@ -65,36 +108,76 @@ programa
 					player2 = "UberEats"
 				}
 	
-				escreva(player2, "VOCE JOGA PRIMEIRO\n")	
-				jogo()										
+				escreva(player2, "VOCE JOGA PRIMEIRO\n")										
 			}
 		}		
 	}
 
-	funcao jogo()
+	funcao VerificarPlacar(cadeia player1, cadeia player2, inteiro casaPlayer1, inteiro casaPlayer2, inteiro placarPlayer1, inteiro placarPlayer2)
 	{
+		escreva("\nPLACARES\n")
+		escreva(player1, "NA CASA ", casaPlayer1,"\n")
+		escreva(player2, "NA CASA ", casaPlayer2,"\n")
+		escreva("\nRODADAS VENCIDAS\n")
+		escreva(placarPlayer1, " - ", player1, " - ", player2, " - ", placarPlayer2, "\n")
+	}
+
+	funcao fecharJogo(inteiro &keepPlaying)
+	{
+		keepPlaying = 0
+	}
+
+	funcao jogo(cadeia &menuOpt, inteiro keepPlaying, cadeia player1, cadeia player2, inteiro casaPlayer1, inteiro casaPlayer2, inteiro placarPlayer1, inteiro placarPlayer2)
+	{
+		se(menuOpt == "1")
+		{
+		escolherPersonagem()
+		}
+		
+		se(menuOpt == "2")
+		{
+			VerificarPlacar(player1, player2, casaPlayer1, casaPlayer2, placarPlayer1, placarPlayer2)
+		}
+		
+		se(menuOpt == "3")
+		{
+			fecharJogo(keepPlaying)	
+		}
+				
+
 		
 	}
 
 	funcao inicio()
 	{
+		cadeia menuOpt, player1 = "0", player2 = "0"
+		inteiro keepPlaying = 1, casaPlayer1 = 0, casaPlayer2 = 0, placarPlayer1 = 0, placarPlayer2 = 0
 		
-		
-		inteiro vet[3], vet2[3] // vetores para sorteio
-		inteiro repita=1, i=-509, a=1, fechar=3, achei=1, j=1 // laços de repetiçao
-		inteiro comando, comando2=3, iniciar, jogar = 1, entregador=0 // comandos de entrada e comparação
-		inteiro placarEscolhePrimeiro=0, placarEscolheSegundo=0, novoPlacar1 // placares
-		inteiro escolhePrimeiro=0, escolheSegundo=0, novoEscolhePrimeiro // jogadores
-		
-		//--------- Menu Principal
-		
-		escreva("Bem-vindo ao jogo iFood vs Uber Eats\n") 
-		escreva("1 - Jogar\n")	
-		escreva("2 - Verificar Placar\n")
-		escreva("3 - Fechar jogo\n")		
-		
+		enquanto(keepPlaying == 1)
+		{
+			escreva("BEM VINDO AO JOGO DELIVEY MAN\n") 
+			escreva("1 - JOGAR\n")	
+			escreva("2 - VERIFICAR PLACAR\n")
+			escreva("3 - FECHAR JOGO\n")	
+			leia(menuOpt)
 			
+			se(menuOpt == "1")
+			{
+				jogo(menuOpt, keepPlaying, player1, player2, casaPlayer1, casaPlayer2, placarPlayer1, placarPlayer2)
+			}
+	
+			se(menuOpt == "2")
+			{
+				VerificarPlacar(player1, player2, casaPlayer1, casaPlayer2, placarPlayer1, placarPlayer2)	
+			}
+	
+			se(menuOpt == "3")
+			{
+				fecharJogo(keepPlaying)	
+			}
 			
+		}
+				
 		enquanto(a==1){ 
 
 		leia(iniciar)
