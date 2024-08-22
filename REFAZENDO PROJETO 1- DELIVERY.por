@@ -17,7 +17,7 @@ programa
 		keepPlaying = 0
 	}
 	
-	funcao escolherPersonagem(cadeia &player1, cadeia &player2)
+	funcao escolherPersonagem(inteiro &suaVez1, inteiro &suaVez2, cadeia &player1, cadeia &player2, inteiro casaPlayer1, inteiro casaPlayer2)
 	{
 		cadeia inputPlayer1 = "1", inputPlayer2 = "1"
 		inteiro sorteioDado1 = 0, sorteioDado2 = 0, loopPersonagem = 1
@@ -64,7 +64,10 @@ programa
 					player2 = "iFood"
 				}
 				
-				escreva(player1, " VOCE JOGA PRIMEIRO\n")
+				escreva(player1, " VOCE JOGA O DADO PRIMEIRO\n")
+				suaVez1 = 1
+				leia(inputPlayer1)
+				casaPlayer1 = u.sorteia (1,6)				
 				loopPersonagem = 0		
 			}
 	
@@ -88,7 +91,10 @@ programa
 					player1 = "iFood"
 				}
 	
-				escreva(player2, " VOCE JOGA PRIMEIRO\n")	
+				escreva(player2, " VOCE JOGA O DADO PRIMEIRO\n")
+				suaVez2 = 1	
+				leia(inputPlayer2)
+				casaPlayer2 = u.sorteia (1,6)
 				loopPersonagem = 0									
 			}
 		}		
@@ -96,102 +102,132 @@ programa
 
 	funcao jogo(cadeia &menuOpt, inteiro &keepPlaying, cadeia &player1, cadeia &player2, inteiro &casaPlayer1, inteiro &casaPlayer2, inteiro &placarPlayer1, inteiro &placarPlayer2)
 	{
-		enquanto(casaPlayer1 < 20 ou casaPlayer2 < 20)
-		{
-			escolherPersonagem(player1, player2)
+		inteiro suaVez1 = 0, suaVez2 = 0
+		
+		escolherPersonagem(suaVez1, suaVez2, player1, player2, casaPlayer1, casaPlayer2)
+		
+		enquanto(casaPlayer1 <= 20 e keepPlaying == 1 ou casaPlayer2 <= 20 e keepPlaying == 1)
+		{	
+			//se chamar placar => VerificarPlacar(player1, player2, casaPlayer1, casaPlayer2, placarPlayer1, placarPlayer2)
+			//se chamar sair => fecharJogo(keepPlaying)
 			
-			se(casaPlayer1 == 2 e casaPlayer2 < 20)
+			se(suaVez1 == 1 e casaPlayer1 != 2 e casaPlayer1 != 3 e casaPlayer1 != 7 e casaPlayer1 != 10 e casaPlayer1 != 12 e casaPlayer1 != 15 e casaPlayer1 != 19 e casaPlayer1 != 20 e casaPlayer2 < 20 e keepPlaying == 1)
+			{
+				//jogue o dado e casaPlayer1 += u.sorteia(1,6)
+			}
+			
+			se(suaVez1 == 1 e casaPlayer1 == 2 e casaPlayer2 < 20 e keepPlaying == 1)
 			{
 				//deve avançar o jogador para a casa 5.
 			}
 			
-			se(casaPlayer1 == 3 e casaPlayer2 < 20)
+			se(suaVez1 == 1 e casaPlayer1 == 3 e casaPlayer2 < 20 e keepPlaying == 1)
 			{
 				//deve jogar um dado adicional de 3 lados.
 			}
 			
-			se(casaPlayer1 == 7 e casaPlayer2 < 20)
+			se(suaVez1 == 1 e casaPlayer1 == 7 e casaPlayer2 < 20 e keepPlaying == 1)
 			{
 				//deve impedir que o jogador jogue o dado por 1 rodada.
 			}
 			
-			se(casaPlayer1 == 10 e casaPlayer2 < 20)
+			se(suaVez1 == 1 e casaPlayer1 == 10 e casaPlayer2 < 20 e keepPlaying == 1)
 			{
 				//deve trocar as casa em que os jogadores estão.
 			}	
 
-			se(casaPlayer1 == 12 e casaPlayer2 < 20)
+			se(suaVez1 == 1 e casaPlayer1 == 12 e casaPlayer2 < 20 e keepPlaying == 1)
 			{
 				//deve retroceder 1 casa
 			}			
 
-			se(casaPlayer1 == 15 e casaPlayer2 < 20)
+			se(suaVez1 == 1 e casaPlayer1 == 15 e casaPlayer2 < 20 e keepPlaying == 1)
 			{
 				//deve cantar um trecho de uma música (na vida real) ou voltar 2 casas
 			}			
 
-			se(casaPlayer1 == 19 e casaPlayer2 < 20)
+			se(suaVez1 == 1 e casaPlayer1 == 19 e casaPlayer2 < 20 e keepPlaying == 1)
 			{
 				//deve voltar para a casa 1
 			}
 
-			se(casaPlayer1 == 20 e casaPlayer2 < 20)
+			se(suaVez1 == 1 e casaPlayer1 == 20 e casaPlayer2 < 20 e keepPlaying == 1)
 			{
 				//recebe a mensagem de vencedor da partida
 			}		
 
 //-----PLAYER2-----------------------------------------------------------------------------------------------------------------------------------------------------/
-			
-			se(casaPlayer2 == 2 e casaPlayer1 < 20)
+
+			se(suaVez2 == 1 e casaPlayer2 != 2 e casaPlayer2 != 3 e casaPlayer2 != 7 e casaPlayer2 != 10 e casaPlayer2 != 12 e casaPlayer2 != 15 e casaPlayer2 != 19 e casaPlayer2 != 20 e casaPlayer2 < 20 e keepPlaying == 1)
+			{
+				
+			}
+						
+			se(suaVez2 == 1 e casaPlayer2 == 2 e casaPlayer1 < 20 e keepPlaying == 1)
 			{
 				
 			}
 			
-			se(casaPlayer2 == 3 e casaPlayer1 < 20)
+			se(suaVez2 == 1 e casaPlayer2 == 3 e casaPlayer1 < 20 e keepPlaying == 1)
 			{
 				
 			}
 			
-			se(casaPlayer2 == 7 e casaPlayer1 < 20)
+			se(suaVez2 == 1 e casaPlayer2 == 7 e casaPlayer1 < 20 e keepPlaying == 1)
 			{
 				
 			}
 			
-			se(casaPlayer2 == 10 e casaPlayer1 < 20)
+			se(suaVez2 == 1 e casaPlayer2 == 10 e casaPlayer1 < 20 e keepPlaying == 1)
 			{
 				
 			}	
 
-			se(casaPlayer2 == 12 e casaPlayer1 < 20)
+			se(suaVez2 == 1 e casaPlayer2 == 12 e casaPlayer1 < 20 e keepPlaying == 1)
 			{
 				
 			}			
 
-			se(casaPlayer2 == 15 e casaPlayer1 < 20)
+			se(suaVez2 == 1 e casaPlayer2 == 15 e casaPlayer1 < 20 e keepPlaying == 1)
 			{
 				
 			}			
 
-			se(casaPlayer2 == 19 e casaPlayer1 < 20)
+			se(suaVez2 == 1 e casaPlayer2 == 19 e casaPlayer1 < 20 e keepPlaying == 1)
 			{
 				
 			}
 
-			se(casaPlayer2 == 20 e casaPlayer1 < 20)
+			se(suaVez2 == 1 e casaPlayer2 == 20 e casaPlayer1 < 20 e keepPlaying == 1)
 			{
-				
+				//deseja jogar novamente?
 			}															
 		}
+		
+		se(casaPlayer1 >= 20)
+		{
+			casaPlayer1 = 20
+			placarPlayer1++
+		}
+
+		se(casaPlayer2 >= 20)
+		{
+			casaPlayer2 = 20
+			placarPlayer2++
+		}		
 	}
 
 	funcao inicio()
 	{
-		cadeia menuOpt, player1 = "0", player2 = "0"
-		inteiro keepPlaying = 1, casaPlayer1 = 0, casaPlayer2 = 0, placarPlayer1 = 0, placarPlayer2 = 0
+		inteiro keepPlaying = 1
+		escreva("BEM VINDO AO JOGO DELIVEY MAN\n")
+		escreva("MENU PRINCIPAL\n")		
 		
 		enquanto(keepPlaying == 1)
 		{
-			escreva("BEM VINDO AO JOGO DELIVEY MAN\n") 
+			cadeia menuOpt, player1 = "0", player2 = "0"
+			inteiro casaPlayer1 = 0, casaPlayer2 = 0, placarPlayer1 = 0, placarPlayer2 = 0	
+					 
 			escreva("1 - JOGAR\n")	
 			escreva("2 - VERIFICAR PLACAR\n")
 			escreva("3 - FECHAR JOGO\n")	
@@ -207,6 +243,7 @@ programa
 				limpa()				
 				VerificarPlacar(player1, player2, casaPlayer1, casaPlayer2, placarPlayer1, placarPlayer2)
 				u.aguarde(4000)
+				escreva("MENU PRINCIPAL\n")
 			}
 	
 			se(menuOpt == "3")
