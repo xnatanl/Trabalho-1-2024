@@ -26,9 +26,17 @@ programa
 		{	
 			limpa()
 			escreva("\n-SESSAO PARA ESCOLHA DE PERSONAGENS E QUEM JOGARA PRIMEIRO-\n")
-			escreva("\nQUEM JOGAR O MAIOR DADO DEVE\n-ESCOLHER O PERSONAGEM COM QUEM DESEJA JOGAR\n-SAIR JOGANDO\n")	
-			escreva("\n-COMANDOS-\n2- PLACAR\n3- FECHAR JOGO\nOUTRA TECLA- JOGAR\n")		
-			escreva("\nSORTEIEM OS DADOS\n")
+						
+			escreva("\nJOGADOR 1, ESCOLHA SEU PERSONAGEM\n")	
+			leia(inputPlayer1)
+			player1 = inputPlayer1
+			
+			escreva("\nJOGADOR 2, ESCOLHA SEU PERSONAGEM\n")	
+			leia(inputPlayer2)
+			player2 = inputPlayer2			
+
+			escreva("\nSORTEIEM OS DADOS\n")					
+			escreva("\nQUEM JOGAR O MAIOR DADO DEVE\n-SAIR JOGANDO\n")			
 			
 			escreva("JOGADOR 1\n")
 			leia(inputPlayer1)
@@ -46,25 +54,9 @@ programa
 	
 			se(sorteioDado1 > sorteioDado2)
 			{
-				limpa()
-				escreva("JOGADOR 1 TIROU O MAIOR DADO, ESCOLHA SEU PERSONAGEM\n")
-				escreva("0- iFood\n")
-				escreva("1- UberEats\n")	
-				leia(inputPlayer1)
-	
-				se(inputPlayer1 == "0")
-				{
-					player1 = "iFood"
-					player2 = "UberEats"
-				}
-	
-				se(inputPlayer1 == "1")
-				{
-					player1 = "UberEats"
-					player2 = "iFood"
-				}
-				
-				escreva(player1, " VOCE JOGA O DADO PRIMEIRO\n")
+				limpa()	
+				escreva(player1, " VOCE JOGA PRIMEIRO\n")
+				escreva("VOCE PERCORRERA O NUMERO DE CASAS SORTEADO NO DADO\n")
 				suaVez1 = 1
 				leia(inputPlayer1)
 				casaPlayer1 = u.sorteia (1,6)				
@@ -74,24 +66,8 @@ programa
 			se(sorteioDado2 > sorteioDado1)
 			{
 				limpa()
-				escreva("JOGADOR 2 TIROU O MAIOR DADO, ESCOLHA SEU PERSONAGEM\n")
-				escreva("0- iFood\n")
-				escreva("1- UberEats\n")	
-				leia(inputPlayer2)
-	
-				se(inputPlayer2 == "0")
-				{
-					player2 = "iFood"
-					player1 = "UberEats"
-				}
-	
-				se(inputPlayer2 == "1")
-				{
-					player2 = "UberEats"
-					player1 = "iFood"
-				}
-	
-				escreva(player2, " VOCE JOGA O DADO PRIMEIRO\n")
+				escreva(player2, " VOCE JOGA PRIMEIRO\n")
+				escreva("VOCE PERCORRERA O NUMERO DE CASAS SORTEADO NO DADO\n")				
 				suaVez2 = 1	
 				leia(inputPlayer2)
 				casaPlayer2 = u.sorteia (1,6)
@@ -102,106 +78,289 @@ programa
 
 	funcao jogo(cadeia &menuOpt, inteiro &keepPlaying, cadeia &player1, cadeia &player2, inteiro &casaPlayer1, inteiro &casaPlayer2, inteiro &placarPlayer1, inteiro &placarPlayer2)
 	{
-		inteiro suaVez1 = 0, suaVez2 = 0
+		inteiro suaVez1 = 0, suaVez2 = 0, troca = 0
+		cadeia inputPlayer = "0", repitaOpcao = "1"
 		
 		escolherPersonagem(suaVez1, suaVez2, player1, player2, casaPlayer1, casaPlayer2)
+		escreva("\n-COMANDOS-\n2- PLACAR\n3- FECHAR JOGO\nOUTRA TECLA- JOGAR\n")
 		
-		enquanto(casaPlayer1 <= 20 e keepPlaying == 1 ou casaPlayer2 <= 20 e keepPlaying == 1)
-		{	
+		enquanto(casaPlayer1 < 20 e keepPlaying == 1 ou casaPlayer2 < 20 e keepPlaying == 1)
+		{			
 			//se chamar placar => VerificarPlacar(player1, player2, casaPlayer1, casaPlayer2, placarPlayer1, placarPlayer2)
 			//se chamar sair => fecharJogo(keepPlaying)
-			
-			se(suaVez1 == 1 e casaPlayer1 != 2 e casaPlayer1 != 3 e casaPlayer1 != 7 e casaPlayer1 != 10 e casaPlayer1 != 12 e casaPlayer1 != 15 e casaPlayer1 != 19 e casaPlayer1 != 20 e casaPlayer2 < 20 e keepPlaying == 1)
-			{
-				//jogue o dado e casaPlayer1 += u.sorteia(1,6)
-			}
-			
-			se(suaVez1 == 1 e casaPlayer1 == 2 e casaPlayer2 < 20 e keepPlaying == 1)
-			{
-				//deve avançar o jogador para a casa 5.
-			}
-			
-			se(suaVez1 == 1 e casaPlayer1 == 3 e casaPlayer2 < 20 e keepPlaying == 1)
-			{
-				//deve jogar um dado adicional de 3 lados.
-			}
-			
-			se(suaVez1 == 1 e casaPlayer1 == 7 e casaPlayer2 < 20 e keepPlaying == 1)
-			{
-				//deve impedir que o jogador jogue o dado por 1 rodada.
-			}
-			
-			se(suaVez1 == 1 e casaPlayer1 == 10 e casaPlayer2 < 20 e keepPlaying == 1)
-			{
-				//deve trocar as casa em que os jogadores estão.
-			}	
-
-			se(suaVez1 == 1 e casaPlayer1 == 12 e casaPlayer2 < 20 e keepPlaying == 1)
-			{
-				//deve retroceder 1 casa
-			}			
-
-			se(suaVez1 == 1 e casaPlayer1 == 15 e casaPlayer2 < 20 e keepPlaying == 1)
-			{
-				//deve cantar um trecho de uma música (na vida real) ou voltar 2 casas
-			}			
-
-			se(suaVez1 == 1 e casaPlayer1 == 19 e casaPlayer2 < 20 e keepPlaying == 1)
-			{
-				//deve voltar para a casa 1
-			}
-
-			se(suaVez1 == 1 e casaPlayer1 == 20 e casaPlayer2 < 20 e keepPlaying == 1)
-			{
-				//recebe a mensagem de vencedor da partida
-			}		
-
-//-----PLAYER2-----------------------------------------------------------------------------------------------------------------------------------------------------/
-
-			se(suaVez2 == 1 e casaPlayer2 != 2 e casaPlayer2 != 3 e casaPlayer2 != 7 e casaPlayer2 != 10 e casaPlayer2 != 12 e casaPlayer2 != 15 e casaPlayer2 != 19 e casaPlayer2 != 20 e casaPlayer2 < 20 e keepPlaying == 1)
-			{
-				
-			}
+			enquanto(suaVez1 >= 1 e casaPlayer1 < 20)	
+			{	
+				se(suaVez1 >= 1 e casaPlayer1 != 2 e casaPlayer1 != 3 e casaPlayer1 != 7 e casaPlayer1 != 10 e casaPlayer1 != 12 e casaPlayer1 != 15 e casaPlayer1 != 19 e casaPlayer1 < 20 e casaPlayer2 < 20 e keepPlaying == 1)
+				{
+					escreva(player1, " MUITO BOM! VOCE CHEGOU NA [CASA ", casaPlayer1, "]\n")
+					se(suaVez1 != 2)
+					{ 
+						escreva(player2, " SUA VEZ! JOGUE O DADO\n")	
+						leia(inputPlayer)					
+						casaPlayer2 += u.sorteia(1, 6)				
+						suaVez2 = 1	
+					}	
 						
-			se(suaVez2 == 1 e casaPlayer2 == 2 e casaPlayer1 < 20 e keepPlaying == 1)
-			{
+					suaVez1--
+					//jogue o dado e casaPlayer2 += u.sorteia(1,6)
+				}
 				
+				se(suaVez1 >= 1 e casaPlayer1 == 2 e casaPlayer2 < 20 e keepPlaying == 1)
+				{
+					escreva("\n", player1, " MUITO BOM! VOCE CHEGOU NA [CASA ", casaPlayer1, "]\n")
+					escreva("AGORA VOCE DEVE AVANÇAR PARA A [CASA 5]\n")
+					casaPlayer1 += 5
+					suaVez1--		
+					se(suaVez1 != 2)
+					{ 						
+						escreva(player2, " SUA VEZ! JOGUE O DADO\n")	
+						leia(inputPlayer)					
+						casaPlayer2 += u.sorteia(1, 6)			
+						suaVez2 = 1				
+					} //deve avançar o jogador para a casa 5.
+				}
+				
+				se(suaVez1 >= 1 e casaPlayer1 == 3 e casaPlayer2 < 20 e keepPlaying == 1)
+				{
+					escreva("\n", player1, " MUITO BOM! VOCE CHEGOU NA [CASA ", casaPlayer1, "]\n")
+					escreva("AGORA VOCE DEVE JOGAR MAIS UM DADO DE 3 LADOS\n")
+					leia(inputPlayer)				
+					casaPlayer1 += u.sorteia(1, 3)
+					suaVez1 = 1	
+				}
+				
+				se(suaVez1 >= 1 e casaPlayer1 == 7 e casaPlayer2 < 20 e keepPlaying == 1)
+				{
+					escreva("\n", player1, " PARECE QUE... VOCE CHEGOU NA [CASA ", casaPlayer1, "]\n")
+					escreva("INFELIZMENTE, VOCE NAO PODERA JOGAR NA PROXIMA RODADA\n")	
+					suaVez1 = 0
+					escreva(player2, " SUA VEZ! JOGUE O DADO\n")	
+					leia(inputPlayer)					
+					casaPlayer2 += u.sorteia(1, 6)					
+					suaVez2 = 2
+					//deve impedir que o jogador jogue o dado por 1 rodada.
+				}
+				
+				se(suaVez1 >= 1 e casaPlayer1 == 10 e casaPlayer2 < 20 e keepPlaying == 1)
+				{
+					escreva("\nAS SUAS POSIÇOES FORAM TROCADAS!!\n")
+					troca = casaPlayer1
+					casaPlayer1 = casaPlayer2
+					casaPlayer2 = troca
+					escreva(player1, "VOCE AGORA ESTA NA CASA ", casaPlayer1, "\n")
+					escreva(player2, "VOCE AGORA ESTA NA CASA ", casaPlayer2, "\n")
+					suaVez1--
+					se(suaVez1 != 2)
+					{ 					
+						escreva(player2, " SUA VEZ! JOGUE O DADO\n")	
+						leia(inputPlayer)					
+						casaPlayer2 += u.sorteia(1, 6)				
+						suaVez2 = 1
+					}//deve trocar as casa em que os jogadores estão.
+				}	
+	
+				se(suaVez1 >= 1 e casaPlayer1 == 12 e casaPlayer2 < 20 e keepPlaying == 1)
+				{
+					escreva("\nVOCE CHEGOU NA [CASA 12], AGORA VOCE DEVE RETROCEDER 1 CASA\n")
+					casaPlayer1 -= 1
+					suaVez1--
+					se(suaVez1 != 2)
+					{ 					
+						escreva(player2, " SUA VEZ! JOGUE O DADO\n")	
+						leia(inputPlayer)					
+						casaPlayer2 += u.sorteia(1, 6)	
+						suaVez2 = 1				
+					}//deve retroceder 1 casa
+				}			
+	
+				se(suaVez1 >= 1 e casaPlayer1 == 15 e casaPlayer2 < 20 e keepPlaying == 1)
+				{	
+					repitaOpcao = "1"	
+													
+					enquanto(repitaOpcao == "1")
+					{
+						escreva("\nVOCE CHEGOU NA [CASA 15], AGORA VOCE DEVE ESCOLHER ENTRE ")
+						escreva("CANTAR UM TRECHO DE UMA MUSICA OU VOLTAR 2 CASAS\n")	
+						escreva("1- CANTAR O TRECHO DE UMA MUSICA\n")
+						escreva("2- VOLTAR 2 CASAS\n")
+						leia(inputPlayer)
+						se(inputPlayer == "1")
+						{
+							escreva("*TRECHO DA MUSICA*\n")
+							u.aguarde(5000)
+							repitaOpcao = "0"		
+						} senao {
+							se(inputPlayer == "2")
+							{
+								casaPlayer1 -= 2
+								repitaOpcao = "0"	
+							} senao {
+								repitaOpcao = "1"									
+							}
+						}
+						//deve cantar um trecho de uma música (na vida real) ou voltar 2 casas
+					}
+					
+					suaVez1--
+					se(suaVez1 != 2)
+					{ 					
+						escreva(player2, " SUA VEZ! JOGUE O DADO\n")	
+						leia(inputPlayer)					
+						casaPlayer2 += u.sorteia(1, 6)	
+						suaVez2 = 1
+					}						
+				}			
+	
+				se(suaVez1 >= 1 e casaPlayer1 == 19 e casaPlayer2 < 20 e keepPlaying == 1)
+				{
+					escreva("\nVOCE CHEGOU NA [CASA 19], INFELIZMENTE PARECE QUE VOCE DEVE VOLTAR PARA A CASA 1\n")	
+					casaPlayer1 = 1
+					suaVez1--		
+					se(suaVez1 != 2)
+					{ 						
+						escreva(player2, " SUA VEZ! JOGUE O DADO\n")	
+						leia(inputPlayer)					
+						casaPlayer2 += u.sorteia(1, 6)	
+						suaVez2 = 1
+					}					
+					//deve voltar para a casa 1
+				}
+	
+				se(suaVez1 >= 1 e casaPlayer1 > 19 e casaPlayer2 < 20 e keepPlaying == 1)
+				{
+					escreva("\nVOCE CHEGOU NA [CASA 20], PARABENS!!! VOCE VENCEU O JOGO E ACRESCENTOU +1 PONTO NO SEU PLACAR\n")
+					//recebe a mensagem de vencedor da partida
+				}		
 			}
-			
-			se(suaVez2 == 1 e casaPlayer2 == 3 e casaPlayer1 < 20 e keepPlaying == 1)
+//-----PLAYER2-----------------------------------------------------------------------------------------------------------------------------------------------------/
+			enquanto(suaVez2 >= 1 e casaPlayer2 < 20)	
 			{
+				se(suaVez2 >= 1 e casaPlayer2 != 2 e casaPlayer2 != 3 e casaPlayer2 != 7 e casaPlayer2 != 10 e casaPlayer2 != 12 e casaPlayer2 != 15 e casaPlayer2 != 19 e casaPlayer2 < 20 e casaPlayer2 < 20 e keepPlaying == 1)
+				{
+					escreva(player2, " MUITO BOM! VOCE CHEGOU NA [CASA ", casaPlayer2, "]\n")
+					se(suaVez2 != 2)
+					{ 
+						escreva(player1, " SUA VEZ! JOGUE O DADO\n")	
+						leia(inputPlayer)					
+						casaPlayer1 += u.sorteia(1, 6)				
+						suaVez1 = 1	
+					}	
+						
+					suaVez2--
+				}
+							
+				se(suaVez2 >= 1 e casaPlayer2 == 2 e casaPlayer1 < 20 e keepPlaying == 1)
+				{
+					escreva(player2, " MUITO BOM! VOCE CHEGOU NA [CASA ", casaPlayer2, "]\n")
+					escreva("AGORA VOCE DEVE AVANÇAR PARA A [CASA 5]\n")
+					casaPlayer2 += 5
+					se(suaVez2 != 2)
+					{ 				
+						escreva(player1, " SUA VEZ! JOGUE O DADO\n")	
+						leia(inputPlayer)					
+						casaPlayer1 += u.sorteia(1, 6)			
+						suaVez1 = 1
+					}				
+					suaVez2--						
+				}
+					
+				se(suaVez2 >= 1 e casaPlayer2 == 3 e casaPlayer1 < 20 e keepPlaying == 1)
+				{
+					escreva(player2, " MUITO BOM! VOCE CHEGOU NA [CASA ", casaPlayer2, "]\n")
+					escreva("AGORA VOCE DEVE JOGAR MAIS UM DADO DE 3 LADOS\n")
+					leia(inputPlayer)				
+					casaPlayer2 += u.sorteia(1, 3)
+					suaVez2 = 1					
+				}
 				
-			}
-			
-			se(suaVez2 == 1 e casaPlayer2 == 7 e casaPlayer1 < 20 e keepPlaying == 1)
-			{
+				se(suaVez2 >= 1 e casaPlayer2 == 7 e casaPlayer1 < 20 e keepPlaying == 1)
+				{
+					escreva(player2, " PARECE QUE... VOCE CHEGOU NA [CASA ", casaPlayer2, "]\n")
+					escreva("INFELIZMENTE, VOCE NAO PODERA JOGAR NA PROXIMA RODADA\n")	
+					suaVez2 = 0
+					escreva(player1, " SUA VEZ! JOGUE O DADO\n")	
+					leia(inputPlayer)					
+					casaPlayer1 += u.sorteia(1, 6)				
+					suaVez1 = 2				
+				}
 				
-			}
-			
-			se(suaVez2 == 1 e casaPlayer2 == 10 e casaPlayer1 < 20 e keepPlaying == 1)
-			{
-				
-			}	
-
-			se(suaVez2 == 1 e casaPlayer2 == 12 e casaPlayer1 < 20 e keepPlaying == 1)
-			{
-				
-			}			
-
-			se(suaVez2 == 1 e casaPlayer2 == 15 e casaPlayer1 < 20 e keepPlaying == 1)
-			{
-				
-			}			
-
-			se(suaVez2 == 1 e casaPlayer2 == 19 e casaPlayer1 < 20 e keepPlaying == 1)
-			{
-				
-			}
-
-			se(suaVez2 == 1 e casaPlayer2 == 20 e casaPlayer1 < 20 e keepPlaying == 1)
-			{
-				//deseja jogar novamente?
-			}															
+				se(suaVez2 >= 1 e casaPlayer2 == 10 e casaPlayer1 < 20 e keepPlaying == 1)
+				{
+					escreva("\nAS SUAS POSIÇOES FORAM TROCADAS!!\n")
+					troca = casaPlayer1
+					casaPlayer1 = casaPlayer2
+					casaPlayer2 = troca
+					escreva(player1, "VOCE AGORA ESTA NA CASA ", casaPlayer1, "\n")
+					escreva(player2, "VOCE AGORA ESTA NA CASA ", casaPlayer2, "\n")
+					suaVez2--
+					escreva(player1, " SUA VEZ! JOGUE O DADO\n")	
+					leia(inputPlayer)					
+					casaPlayer1 += u.sorteia(1, 6)				
+					suaVez1 = 1					
+				}	
+	
+				se(suaVez2 >= 1 e casaPlayer2 == 12 e casaPlayer1 < 20 e keepPlaying == 1)
+				{
+					escreva("\nVOCE CHEGOU NA [CASA 12], AGORA VOCE DEVE RETROCEDER 1 CASA\n")
+					casaPlayer2 -= 1
+					suaVez2--
+					escreva(player1, " SUA VEZ! JOGUE O DADO\n")	
+					leia(inputPlayer)					
+					casaPlayer1 += u.sorteia(1, 6)	
+					suaVez1 = 1							
+				}			
+	
+				se(suaVez2 >= 1 e casaPlayer2 == 15 e casaPlayer1 < 20 e keepPlaying == 1)
+				{	
+					repitaOpcao = "1"		
+						
+					enquanto(repitaOpcao == "1")
+					{
+						escreva("\nVOCE CHEGOU NA [CASA 15], AGORA VOCE DEVE ESCOLHER ENTRE ")
+						escreva("CANTAR UM TRECHO DE UMA MUSICA OU VOLTAR 2 CASAS\n")	
+						escreva("1- CANTAR O TRECHO DE UMA MUSICA\n")
+						escreva("2- VOLTAR 2 CASAS\n")
+						leia(inputPlayer)
+						se(inputPlayer == "1")
+						{
+							escreva("*TRECHO DA MUSICA*\n")
+							u.aguarde(5000)
+							repitaOpcao = "0"		
+						} senao {
+							se(inputPlayer == "2")
+							{
+								casaPlayer2 -= 2
+								repitaOpcao = "0"	
+							} senao {
+								repitaOpcao = "1"									
+							}
+						}
+						//deve cantar um trecho de uma música (na vida real) ou voltar 2 casas
+					}
+					
+					suaVez2--
+					escreva(player1, " SUA VEZ! JOGUE O DADO\n")	
+					leia(inputPlayer)					
+					casaPlayer1 += u.sorteia(1, 6)	
+					suaVez1 = 1					
+				}			
+	
+				se(suaVez2 >= 1 e casaPlayer2 == 19 e casaPlayer1 < 20 e keepPlaying == 1)
+				{
+					escreva("\nVOCE CHEGOU NA [CASA 19], INFELIZMENTE PARECE QUE VOCE DEVE VOLTAR PARA A CASA 1\n")	
+					casaPlayer2 = 1
+					suaVez2--			
+					escreva(player1, " SUA VEZ! JOGUE O DADO\n")	
+					leia(inputPlayer)					
+					casaPlayer1 += u.sorteia(1, 6)	
+					suaVez1 = 1						
+				}
+	
+				se(suaVez2 >= 1 e casaPlayer2 > 19 e casaPlayer1 < 20 e keepPlaying == 1)
+				{
+					escreva("\nVOCE CHEGOU NA [CASA 20], PARABENS!!! VOCE VENCEU O JOGO E ACRESCENTOU +1 PONTO NO SEU PLACAR\n")					
+				}
+			}														
 		}
 		
 		se(casaPlayer1 >= 20)
@@ -226,7 +385,7 @@ programa
 		enquanto(keepPlaying == 1)
 		{
 			cadeia menuOpt, player1 = "0", player2 = "0"
-			inteiro casaPlayer1 = 0, casaPlayer2 = 0, placarPlayer1 = 0, placarPlayer2 = 0	
+			inteiro casaPlayer1 = 1, casaPlayer2 = 1, placarPlayer1 = 0, placarPlayer2 = 0	
 					 
 			escreva("1 - JOGAR\n")	
 			escreva("2 - VERIFICAR PLACAR\n")
